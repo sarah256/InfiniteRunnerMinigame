@@ -1,8 +1,10 @@
 import pygame
 import sys
 import threading
+import math
 from threading import Thread
 from time import sleep
+
 
 def load_image(name):
     image = pygame.image.load(name)
@@ -25,16 +27,22 @@ class pikaSprite(pygame.sprite.Sprite):
         self.index = 0
         self.image = self.images[self.index]
         self.rect = pygame.Rect(20,350,64,64)
+        self.isjump = 0
+        self.v = 8
+        self.m = 6
         
+    def jump(self):
+        self.isjump = 1
     
     def update(self):
         """iterates through the images within self.images"""
         sleep(.04)
-        self.index+=1
-        if self.index >= len(self.images):
-            self.index = 0
-        self.image = self.images[self.index]
-        
+        if not self.isjump:
+            self.index+=1
+            if self.index >= len(self.images):
+                self.index = 0
+            self.image = self.images[self.index]
+                
         
 pygame.init()
 pygame.display.set_caption('PikaRun')
@@ -46,8 +54,8 @@ pikachu = pikaSprite()
 group = pygame.sprite.Group(pikachu)
 x = 0
 x2 = -957
-
-        
+abc = 0
+cur = 0  
         
 def pikaMove():
     group.update()
@@ -56,9 +64,19 @@ def pikaMove():
     
 while running:
     event = pygame.event.poll()
+    key = pygame.key.get_pressed()
     if event.type == pygame.QUIT:
         pygame.quit()
         sys.exit(0)
+    if key[pygame.K_SPACE] and not pikachu.isjump:
+        pikachu.rect.y -= 40
+        pikachu.isjump = 1
+        cur = abc
+        pikachu.image = pikachu.images[2]
+    abc += 1
+    if pikachu.isjump and abc == (cur+10):
+        pikachu.rect.y += 40
+        pikachu.isjump = 0
     window.blit(background_image, [-x, 0])
     window.blit(background_image, [-x2, 0])
     if x < 957:
