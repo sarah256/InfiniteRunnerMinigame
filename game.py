@@ -54,7 +54,7 @@ pikachu = pikaSprite()
 group = pygame.sprite.Group(pikachu)
 x = 0
 x2 = -957
-abc = 0
+delay = 0
 cur = 0  
         
 def pikaMove():
@@ -69,13 +69,25 @@ while running:
         pygame.quit()
         sys.exit(0)
     if key[pygame.K_SPACE] and not pikachu.isjump:
-        pikachu.rect.y -= 40
+        pikachu.rect.y -= 12
         pikachu.isjump = 1
-        cur = abc
+        cur = delay
         pikachu.image = pikachu.images[2]
-    abc += 1
-    if pikachu.isjump and abc == (cur+10):
-        pikachu.rect.y += 40
+    delay += 1
+    if pikachu.isjump and delay == (cur+2):
+        pikachu.rect.y -= 12
+    if pikachu.isjump and delay == (cur+4):
+        pikachu.rect.y -= 12
+    if pikachu.isjump and delay == (cur+6):
+        pikachu.rect.y -= 12
+    if pikachu.isjump and delay == (cur+8):
+        pikachu.rect.y += 12
+    if pikachu.isjump and delay == (cur+10):
+        pikachu.rect.y += 12
+    if pikachu.isjump and delay == (cur+12):
+        pikachu.rect.y += 12
+    if pikachu.isjump and delay == (cur+14):
+        pikachu.rect.y += 12
         pikachu.isjump = 0
     window.blit(background_image, [-x, 0])
     window.blit(background_image, [-x2, 0])
