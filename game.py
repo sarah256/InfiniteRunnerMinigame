@@ -29,8 +29,7 @@ class pikaSprite(pygame.sprite.Sprite):
     
     def update(self):
         """iterates through the images within self.images"""
-        #pygame.time.delay(200)
-        sleep(.2)
+        sleep(.04)
         self.index+=1
         if self.index >= len(self.images):
             self.index = 0
@@ -63,11 +62,11 @@ while running:
     window.blit(background_image, [-x, 0])
     window.blit(background_image, [-x2, 0])
     if x < 957:
-        x += 5
+        x += 10
     else:
         x = -957
     if x2 < 957:
-        x2+=5
+        x2+=10
     else:
         x2=-957
     Thread(target = pikaMove()).start()
