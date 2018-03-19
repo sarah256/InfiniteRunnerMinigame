@@ -56,8 +56,8 @@ x = 0
 x2 = -957
 delay = 0
 cur = 0  
-jumpInt = 2 #the interval for each jump frame -- affects speed
-jumpHeight = 16 #the height for each jump frame
+jumpInt = 1 #the interval for each jump frame -- affects speed
+jumpHeight = 20 #the height for each jump frame
      
    
 def pikaMove():
