@@ -13,6 +13,8 @@ img2 = pygame.transform.scale(load_image('pika-2.png'),(80,60))
 img3 = pygame.transform.scale(load_image('pika-3.png'),(80,60))
 img4 = pygame.transform.scale(load_image('pika-4.png'),(80,60))
 
+stump = pygame.transform.scale(load_image('stump.png'),(150,120))
+
 
 class pikaSprite(pygame.sprite.Sprite):
     def __init__(self):
@@ -42,6 +44,19 @@ class pikaSprite(pygame.sprite.Sprite):
                 self.index = 0
             self.image = self.images[self.index]
                 
+
+class stumpObstacle(pygame.sprite.Sprite):
+    def __init__(self):
+        super(stumpObstacle,self).__init__()
+        self.image = stump
+        self.rect = self.image.get_rect()
+        self.rect.y = 335
+        self.rect.x = 957
+        
+    def update(self):
+        """constantly updates stump position"""
+        self.rect.x -= 10
+
         
 pygame.init()
 pygame.display.set_caption('PikaRun')
@@ -52,12 +67,15 @@ running = True
 pikachu = pikaSprite()
 group = pygame.sprite.Group(pikachu)
 
+stump = stumpObstacle()
+obstacles = pygame.sprite.Group(stump)
+
 x = 0
 x2 = -957
 delay = 0
 cur = 0  
-jumpInt = 1 #the interval for each jump frame -- affects speed
-jumpHeight = 20 #the height for each jump frame
+jumpInt = 2 #the interval for each jump frame -- affects speed
+jumpHeight = 22 #the height for each jump frame
      
    
 def pikaMove():
@@ -112,6 +130,9 @@ while running:
         x2+=10
     else:
         x2=-957
+    
+    obstacles.update()
+    obstacles.draw(window)
     
     #constantly updating the display
     pikaMove()
