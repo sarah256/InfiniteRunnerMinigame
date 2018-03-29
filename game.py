@@ -1,6 +1,6 @@
 import pygame
 import sys
-import numpy.random
+import random
 from time import sleep
 
 
@@ -49,7 +49,8 @@ class stumpObstacle(pygame.sprite.Sprite):
     def __init__(self):
         super(stumpObstacle,self).__init__()
         self.image = stump
-        self.rect = self.image.get_rect()
+        self.rect = pygame.Rect(150,120,957,335)
+        #self.rect = self.image.get_rect()
         self.rect.y = 335
         self.rect.x = 957
         
@@ -131,6 +132,11 @@ while running:
     else:
         x2=-957
     
+    #newstump = stumpObstacle()
+    
+#    randInt = random.randrange(0,4)
+#    if randInt == 2:
+#        obstacles.add(newstump)
     obstacles.update()
     obstacles.draw(window)
     
